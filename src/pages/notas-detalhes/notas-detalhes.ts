@@ -17,7 +17,7 @@ export class NotasDetalhesPage {
 
   porcentagem(nota, max = 100) {
     return Number(
-      ((parseFloat(nota)/max) * 100 ).toFixed(2)
+      ((parseFloat(nota.replace(',', '.'))/max) * 100 ).toFixed(2)
     );
   }
 
