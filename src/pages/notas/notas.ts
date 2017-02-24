@@ -18,7 +18,7 @@ export class NotasPage {
   }
 
   doRefresh(refresher) {
-    this.notasProvider.notasOnline().then(
+    this.notasProvider.online().then(
       sucess => {
         console.log('NotasPage > refresh', sucess);
         refresher.complete();

@@ -1,17 +1,37 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Horários de Aula</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-row>
+    <ion-col><strong>Horário</strong></ion-col>
+    <ion-col><strong>Segunda</strong></ion-col>
+    <ion-col><strong>Terça</strong></ion-col>
+    <ion-col><strong>Quarta</strong></ion-col>
+    <ion-col><strong>Quinta</strong></ion-col>
+    <ion-col><strong>Sexta</strong></ion-col>
+    <ion-col><strong>Sábado</strong></ion-col>
+  </ion-row>
+  <ion-row *ngFor="let h of horarios.horarios | async">
+    <ion-col>{{h.hora}}</ion-col>
+    <!--
+    <ion-col>{{h.segunda.sala}} - {{h.segunda.codigo}}</ion-col>
+    <ion-col>{{h.terca.sala}} - {{h.terca.codigo}}</ion-col>
+    <ion-col>{{h.quarta.sala}} - {{h.quarta.codigo}}</ion-col>
+    <ion-col>{{h.quinta.sala}} - {{h.quinta.codigo}}</ion-col>
+    <ion-col>{{h.sexta.sala}} - {{h.sexta.codigo}}</ion-col>
+    -->
+    <ion-col>A</ion-col>
+    <ion-col>A</ion-col>
+    <ion-col>A</ion-col>
+    <ion-col>A</ion-col>
+    <ion-col>A</ion-col>
+    <ion-col>A</ion-col>
+  </ion-row>
 </ion-content>

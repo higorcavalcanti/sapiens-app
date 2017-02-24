@@ -6,47 +6,47 @@ import {API} from './api';
 import {Database} from './database';
 
 @Injectable()
-export class Notas {
+export class Horarios {
 
-  private notas: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  private horarios: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private api: API, private database: Database) {
     this.offline();
     this.online();
   }
 
-  public getNotas(): Observable<any[]> {
-    return this.notas.asObservable();
+  public getHorarios(): Observable<any[]> {
+    return this.horarios.asObservable();
   }
 
   public offline() {
-    this.database.get('notas').then(
+    this.database.get('horarios').then(
       (data: any) => {
-        this.notas.next(data);
+        this.horarios.next(data);
       },
       (err: any) => {
-        console.log('Falha ao carregar notas offline', err);
+        console.log('Falha ao carregar horarios offline', err);
       }
     );
   }
 
   public online() {
     return new Promise((resolve, reject) => {
-      this.api.request('notas').then(
+      this.api.request('horarios').then(
         (data: any) => {
-          console.log('Notas Provider > online', data);
+          console.log('Horarios Provider > online', data);
 
           if (data.hasOwnProperty('logado') && !data.logado) {
             if (data.hasOwnProperty('erro')) reject(data.erro);
             else reject('Erro desconhecido');
           }
 
-          this.notas.next(data);
-          this.database.set('notas', JSON.stringify(data));
+          this.horarios.next(data);
+          this.database.set('horarios', JSON.stringify(data));
           resolve(true);
         },
         (err: any) => {
-          console.log('Notas Provider > online > err', err);
+          console.log('Horarios Provider > online > err', err);
           reject(err);
         }
       );
