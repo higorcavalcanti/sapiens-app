@@ -11,7 +11,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
+  <div style="text-align: center" *ngIf="!(notas | async).length">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <ion-list *ngIf="(notas | async).length">
     <ion-item *ngFor="let nota of notas | async" (click)="disciplina(nota)">
       <h2>{{nota.nome}}</h2>
       <p>Data alteração: {{nota.alteracao}}</p>
