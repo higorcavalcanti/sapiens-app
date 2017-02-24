@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{disciplina.nome}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <h2>Faltas práticas:</h2>
+      <ion-badge item-right>
+        {{disciplina.faltas?.praticas}}
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <h2>Faltas teóricas:</h2>
+      <ion-badge item-right>
+        {{disciplina.faltas.teoricas}}
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <h2>Nota Final:</h2>
+      <ion-badge item-right [color]="calculaCor(disciplina.nota.final)">
+        {{disciplina.nota.final}}
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <h2>Conceito:</h2>
+      <ion-badge item-right [color]="calculaCor(disciplina.nota.conceito)">
+        {{disciplina.nota.conceito}}
+      </ion-badge>
+    </ion-item>
+
+    <ion-item *ngFor="let nota of disciplina.nota.notas">
+      <h2>{{nota.nome}}:</h2>
+      <ion-badge item-right [color]="calculaCor(nota.valor, nota.max)">
+        {{nota.valor}} de {{nota.max}} ({{porcentagem(nota.valor, nota.max)}}%)
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
