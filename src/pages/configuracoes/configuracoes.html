@@ -1,17 +1,75 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Configurações
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
-    </ion-item>
+    <ion-list-header>
+      Notificações antes da aula
+    </ion-list-header>
+    <ion-item-group>
+      <ion-item>
+        <ion-label>Receber notificações</ion-label>
+        <ion-toggle color="secondary" (ionChange)="changed($event)"
+                    [(ngModel)]="config['notif_aula_ativo']"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tempo antes da aula</ion-label>
+        <ion-select (ionChange)="changed($event)" [(ngModel)]="config['notif_aula_tempo']"
+                    [disabled]="!config['notif_aula_ativo']">
+          <ion-option value="60">1 hora</ion-option>
+          <ion-option value="45">45 minutos</ion-option>
+          <ion-option value="30">30 minutos</ion-option>
+          <ion-option value="20">20 minutos</ion-option>
+          <ion-option value="15">15 minutos</ion-option>
+          <ion-option value="10">10 minutos</ion-option>
+          <ion-option value="5">5 minutos</ion-option>
+          <ion-option value="0">Horário da aula</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+
+  <br><br>
+  <hr>
+  <ion-list>
+    <ion-list-header>
+      Notificações de notas
+    </ion-list-header>
+    <ion-item-group>
+      <ion-item>
+        <ion-label>Receber notificações</ion-label>
+        <ion-toggle color="secondary" (ionChange)="changed($event)"
+                    [(ngModel)]="config['notif_nota_ativo']"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Verificar notas a cada</ion-label>
+        <ion-select (ionChange)="changed($event)" [(ngModel)]="config['notif_nota_tempo']"
+                    [disabled]="!config['notif_nota_ativo']">
+          <ion-option value="60">1 hora</ion-option>
+          <ion-option value="45">45 minutos</ion-option>
+          <ion-option value="30">30 minutos</ion-option>
+          <ion-option value="20">20 minutos</ion-option>
+          <ion-option value="15">15 minutos</ion-option>
+          <ion-option value="10">10 minutos</ion-option>
+          <ion-option value="5">5 minutos</ion-option>
+          <ion-option value="0">Horário da aula</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button full (click)="logout()">
+      Sair do sistema
+    </button>
+  </ion-toolbar>
+</ion-footer>

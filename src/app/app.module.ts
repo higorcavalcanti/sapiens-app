@@ -14,6 +14,7 @@ import { Database } from '../providers/database';
 import { Sapiens } from '../providers/sapiens';
 import { Notas } from '../providers/notas';
 import { Horarios } from '../providers/horarios';
+import { Configuracoes } from '../providers/configuracoes';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { Horarios } from '../providers/horarios';
     Sapiens,
     Notas,
     Horarios,
+    Configuracoes,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

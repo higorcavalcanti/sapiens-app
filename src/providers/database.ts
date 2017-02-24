@@ -16,11 +16,11 @@ export class Database {
       this.platform.ready().then(() => {
         NativeStorage.setItem(key, value).then(
           (data: any) => {
-            console.log('Database > set', key);
+            console.log('Database > set', key, JSON.parse(value) );
             resolve(data);
           },
           (err: any) => {
-            console.log('Database > set error', key, err);
+            console.log('Database > set error', key, value, err);
             //reject(err);
           }
         );
@@ -33,7 +33,7 @@ export class Database {
       this.platform.ready().then(() => {
         NativeStorage.getItem(key).then(
           (data: any) => {
-            console.log('Database > get', key);
+            console.log('Database > get', key, JSON.parse(data) );
             resolve(data);
           },
           (err: any) => {
