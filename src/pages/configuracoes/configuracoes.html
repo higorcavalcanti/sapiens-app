@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="padrao">
     <ion-title>
       Configurações
     </ion-title>
@@ -15,7 +15,7 @@
     <ion-item-group>
       <ion-item>
         <ion-label>Receber notificações</ion-label>
-        <ion-toggle color="secondary" (ionChange)="changed($event)"
+        <ion-toggle color="padrao" (ionChange)="changed($event)"
                     [(ngModel)]="config['notif_aula_ativo']"></ion-toggle>
       </ion-item>
       <ion-item>
@@ -45,7 +45,7 @@
     <ion-item-group>
       <ion-item>
         <ion-label>Receber notificações</ion-label>
-        <ion-toggle color="secondary" (ionChange)="changed($event)"
+        <ion-toggle color="padrao" (ionChange)="changed($event)"
                     [(ngModel)]="config['notif_nota_ativo']"></ion-toggle>
       </ion-item>
       <ion-item>
@@ -68,7 +68,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button full (click)="logout()">
+    <button ion-button full color="padrao" (click)="logout()">
       Sair do sistema
     </button>
   </ion-toolbar>
