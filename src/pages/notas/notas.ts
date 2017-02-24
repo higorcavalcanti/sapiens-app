@@ -25,7 +25,7 @@ export class NotasPage {
       },
       err => {
         console.log('NotasPage > refresh > err', err);
-        refresher.complete();
+        refresher.cancel();
         this.alertCtrl.create({
           title: 'Falha ao carregar',
           subTitle: err,

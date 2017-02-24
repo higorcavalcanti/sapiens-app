@@ -22,7 +22,7 @@ export class Notas {
   public offline() {
     this.database.get('notas').then(
       (data: any) => {
-        this.notas.next(data);
+        this.notas.next( JSON.parse(data) );
       },
       (err: any) => {
         console.log('Falha ao carregar notas offline', err);

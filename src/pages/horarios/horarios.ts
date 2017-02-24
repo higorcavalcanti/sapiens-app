@@ -10,10 +10,12 @@ import { Horarios } from '../../providers/horarios';
 export class HorariosPage {
 
   private horarios: any;
+  private disciplinas: any;
 
   constructor(public navCtrl: NavController, private horariosProvider: Horarios, private alertCtrl: AlertController) {
-    this.horarios = this.horariosProvider.getHorarios().subscribe((h) => {
-      console.log('Horarios alterados', h);
+    this.horarios = this.horariosProvider.getHorarios().subscribe((h: any) => {
+      this.disciplinas = h.disciplinas;
+      console.log('HORARIOS NOVOS', h);
     });
   }
 

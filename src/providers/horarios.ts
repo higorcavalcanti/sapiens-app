@@ -22,7 +22,7 @@ export class Horarios {
   public offline() {
     this.database.get('horarios').then(
       (data: any) => {
-        this.horarios.next(data);
+        this.horarios.next( JSON.parse(data) );
       },
       (err: any) => {
         console.log('Falha ao carregar horarios offline', err);
