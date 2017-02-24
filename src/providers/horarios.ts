@@ -9,6 +9,7 @@ import {Database} from './database';
 export class Horarios {
 
   private horarios: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  private disciplinas: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(private api: API, private database: Database) {
     this.offline();
@@ -19,10 +20,16 @@ export class Horarios {
     return this.horarios.asObservable();
   }
 
+  public getDisciplinas(): Observable<any[]> {
+    return this.disciplinas.asObservable();
+  }
+
   public offline() {
     this.database.get('horarios').then(
       (data: any) => {
-        this.horarios.next( JSON.parse(data) );
+        let parse = JSON.parse(data);
+        this.horarios.next(parse.horarios);
+        this.horarios.next(parse.disciplinas);
       },
       (err: any) => {
         console.log('Falha ao carregar horarios offline', err);
@@ -41,7 +48,9 @@ export class Horarios {
             else reject('Erro desconhecido');
           }
 
-          this.horarios.next(data);
+          this.horarios.next(data.horarios);
+          this.disciplinas.next(data.disciplinas);
+
           this.database.set('horarios', JSON.stringify(data));
           resolve(true);
         },

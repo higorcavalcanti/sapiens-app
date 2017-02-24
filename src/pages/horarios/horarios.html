@@ -9,14 +9,32 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-    <ion-item *ngFor="let d of disciplinas">
-      {{d?.codigo}} - {{d?.nome}}
-    </ion-item>
-  </ion-list>
+  <div style="text-align: center" *ngIf="!(horarios | async).length">
+    <ion-spinner></ion-spinner>
+  </div>
 
+  <ion-grid no-padding *ngIf="(disciplinas | async).length">
+    <ion-row>
+      <ion-col><strong>Código</strong></ion-col>
+      <ion-col width-50><strong>Nome</strong></ion-col>
+      <ion-col><strong>Créditos</strong></ion-col>
+      <ion-col><strong>Turma Prática</strong></ion-col>
+      <ion-col><strong>Turma Teórica</strong></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let d of disciplinas | async">
+      <ion-col>{{d.codigo}}</ion-col>
+      <ion-col width-50>{{d.nome}}</ion-col>
+      <ion-col>{{d.creditos}}</ion-col>
+      <ion-col>{{d.turma.pratica}}</ion-col>
+      <ion-col>{{d.turma.teorica}}</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <br>
   <hr>
-  <ion-grid>
+  <br>
+
+  <ion-grid no-padding *ngIf="(horarios | async).length">
     <ion-row>
       <ion-col><strong>Horário</strong></ion-col>
       <ion-col><strong>Segunda</strong></ion-col>
@@ -26,13 +44,36 @@
       <ion-col><strong>Sexta</strong></ion-col>
       <ion-col><strong>Sábado</strong></ion-col>
     </ion-row>
-    <ion-row *ngFor="let h of horarios.horarios | async">
-      <ion-col>{{h.hora}}</ion-col>
-      <ion-col>{{h.segunda.sala}} - {{h.segunda.codigo}}</ion-col>
-      <ion-col>{{h.terca.sala}} - {{h.terca.codigo}}</ion-col>
-      <ion-col>{{h.quarta.sala}} - {{h.quarta.codigo}}</ion-col>
-      <ion-col>{{h.quinta.sala}} - {{h.quinta.codigo}}</ion-col>
-      <ion-col>{{h.sexta.sala}} - {{h.sexta.codigo}}</ion-col>
+    <ion-row *ngFor="let h of horarios | async"
+             [hidden]="!h.segunda.sala && !h.terca.sala && !h.quarta.sala && !h.quinta.sala && !h.sexta.sala && !h.sabado.sala">
+      <ion-col>
+        <p><strong>{{h.hora}}</strong></p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.segunda.codigo}}</strong></p>
+        <p>{{h.segunda.sala}}</p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.terca.codigo}}</strong></p>
+        <p>{{h.terca.sala}}</p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.quarta.codigo}}</strong></p>
+        <p>{{h.quarta.sala}}</p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.quinta.codigo}}</strong></p>
+        <p>{{h.quinta.sala}}</p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.sexta.codigo}}</strong></p>
+        <p>{{h.sexta.sala}}</p>
+      </ion-col>
+      <ion-col>
+        <p><strong>{{h.sabado.codigo}}</strong></p>
+        <p>{{h.sabado.sala}}</p>
+      </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>

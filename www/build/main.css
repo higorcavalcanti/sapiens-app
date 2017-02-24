@@ -21272,3 +21272,31 @@ sub {
     padding-top: calc(16px + 20px);
   }
 }
+
+page-horarios {
+  font-size: small;
+  /*
+  ion-row:nth-child(even) {
+    background-color: #eeeeee;
+  }
+  ion-row:nth-child(odd) {
+    background-color: white;
+  }
+  */
+}
+
+page-horarios p {
+  padding: 0;
+  margin: 0;
+}
+
+page-horarios ion-grid {
+  text-align: center;
+}
+
+page-horarios ion-row {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 0;
+  border-right: 0;
+}

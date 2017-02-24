@@ -13,10 +13,8 @@ export class HorariosPage {
   private disciplinas: any;
 
   constructor(public navCtrl: NavController, private horariosProvider: Horarios, private alertCtrl: AlertController) {
-    this.horarios = this.horariosProvider.getHorarios().subscribe((h: any) => {
-      this.disciplinas = h.disciplinas;
-      console.log('HORARIOS NOVOS', h);
-    });
+    this.horarios = this.horariosProvider.getHorarios();
+    this.disciplinas = this.horariosProvider.getDisciplinas();
   }
 
   doRefresh(refresher) {
