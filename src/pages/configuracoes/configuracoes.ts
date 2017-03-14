@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
 import {Configuracoes} from '../../providers/configuracoes';
@@ -9,22 +9,18 @@ import {Configuracoes} from '../../providers/configuracoes';
 })
 export class ConfiguracoesPage {
 
+  @ViewChild('myForm') form;
   public config: any;
 
   constructor(public navCtrl: NavController, private configProvider: Configuracoes) {
-    this.config = {};
+    this.config = this.configProvider.getConfigs();
   }
 
-  public ionViewWillEnter() {
-    this.config = this.configProvider.getPreferences();
-  }
-
-  public changed(event) {
-    this.configProvider.save(this.config);
+  private changed() {
+   this.configProvider.changed( this.config );
   }
 
   public logout() {
 
   }
-
 }

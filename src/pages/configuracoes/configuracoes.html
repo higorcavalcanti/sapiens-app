@@ -7,7 +7,6 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
     <ion-list-header>
       Notificações antes da aula
@@ -15,13 +14,13 @@
     <ion-item-group>
       <ion-item>
         <ion-label>Receber notificações</ion-label>
-        <ion-toggle color="padrao" (ionChange)="changed($event)"
-                    [(ngModel)]="config['notif_aula_ativo']"></ion-toggle>
+        <ion-toggle color="padrao" [(ngModel)]="config.notificacoes.aula.ativo"
+                    (ionChange)="changed($event)"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>Tempo antes da aula</ion-label>
-        <ion-select (ionChange)="changed($event)" [(ngModel)]="config['notif_aula_tempo']"
-                    [disabled]="!config['notif_aula_ativo']">
+        <ion-select [(ngModel)]="config.notificacoes.aula.tempo" [disabled]="!config.notificacoes.aula.ativo"
+                    (ionChange)="changed($event)">
           <ion-option value="60">1 hora</ion-option>
           <ion-option value="45">45 minutos</ion-option>
           <ion-option value="30">30 minutos</ion-option>
@@ -45,21 +44,19 @@
     <ion-item-group>
       <ion-item>
         <ion-label>Receber notificações</ion-label>
-        <ion-toggle color="padrao" (ionChange)="changed($event)"
-                    [(ngModel)]="config['notif_nota_ativo']"></ion-toggle>
+        <ion-toggle color="padrao" [(ngModel)]="config.notificacoes.nota.ativo" disabled="disabled"
+                    (ionChange)="changed($event)"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-label>Verificar notas a cada</ion-label>
-        <ion-select (ionChange)="changed($event)" [(ngModel)]="config['notif_nota_tempo']"
-                    [disabled]="!config['notif_nota_ativo']">
+        <ion-select [(ngModel)]="config.notificacoes.nota.tempo" [disabled]="!config.notificacoes.nota.ativo"
+                    (ionChange)="changed($event)">
+          <ion-option value="1440">Dia</ion-option>
           <ion-option value="60">1 hora</ion-option>
-          <ion-option value="45">45 minutos</ion-option>
           <ion-option value="30">30 minutos</ion-option>
           <ion-option value="20">20 minutos</ion-option>
-          <ion-option value="15">15 minutos</ion-option>
           <ion-option value="10">10 minutos</ion-option>
           <ion-option value="5">5 minutos</ion-option>
-          <ion-option value="0">Horário da aula</ion-option>
         </ion-select>
       </ion-item>
     </ion-item-group>

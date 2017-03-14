@@ -29,7 +29,7 @@ export class Horarios {
       (data: any) => {
         let parse = JSON.parse(data);
         this.horarios.next(parse.horarios);
-        this.horarios.next(parse.disciplinas);
+        this.disciplinas.next(parse.disciplinas);
       },
       (err: any) => {
         console.log('Falha ao carregar horarios offline', err);

@@ -1,42 +1,75 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from "rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 
 import {Database} from './database';
 
 @Injectable()
 export class Configuracoes {
 
-  public _preferences: any;
+  private _configs: BehaviorSubject<any> = new BehaviorSubject([]);
+  private prefs: {
+    usuario: {
+      save: boolean,
+      user?: string,
+      pass?: string
+    },
+    notificacoes: {
+      aula: {
+        ativo: boolean,
+        tempo: number
+      },
+      nota: {
+        ativo: boolean,
+        tempo: number
+      }
+    }
+  };
 
   constructor(public database: Database) {
     console.log('Config provider construtor');
-    this._preferences = {};
+
+    this._configs.subscribe((pref) => {
+      console.log('Configs alteradas', pref);
+      this.prefs = pref;
+      this.database.set('configs', JSON.stringify(this.prefs));
+    });
   }
 
   public initializePreferences() {
     console.log('initializePreferences');
     this.database.get('configs').then(
       (result: any) => {
+        this._configs.next( JSON.parse(result) );
         console.log('preferences obtained from storage');
-        this._preferences = JSON.parse(result);
       },
       (err) => {
-        this._preferences['notif_aula_ativo'] = true;
-        this._preferences['notif_aula_tempo'] = 30;
-        this._preferences['notif_nota_ativo'] = true;
-        this._preferences['notif_nota_tempo'] = 30;
-        this.database.set('configs', JSON.stringify(this._preferences)).then();
-        console.log('initializePreferences with default values', this._preferences);
+        this.prefs = {
+          usuario: {
+            save: false,
+          },
+          notificacoes: {
+            aula: { ativo: true, tempo: 10 },
+            nota: { ativo: false, tempo: 60 },
+          }
+        };
+        this._configs.next( this.prefs );
+        console.log('initializePreferences with default values', this.prefs);
       }
     );
   }
 
-  public getPreferences() {
-    console.log('config provider getPref', this._preferences);
-    return this._preferences;
+  public getConfigsObservable(): Observable<any[]> {
+    console.log("ConfigsProvider > getConfigsObservable", this._configs.asObservable());
+    return this._configs.asObservable();
   }
 
-  public save(prefs) {
-    this._preferences = prefs;//update pref in memory
-    this.database.set('configs', JSON.stringify(this._preferences));//update pref in db
+  public getConfigs() {
+    console.log("ConfigsProvider > getConfigs", this.prefs);
+    return this.prefs;
+  }
+
+  public changed(config) {
+    this._configs.next( config );
   }
 }
