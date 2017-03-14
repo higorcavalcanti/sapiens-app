@@ -4,6 +4,7 @@ import {NavController, AlertController, LoadingController} from 'ionic-angular';
 import {TabsPage} from '../tabs/tabs';
 
 import {Sapiens} from '../../providers/sapiens';
+import {Configuracoes} from '../../providers/configuracoes';
 
 @Component({
   selector: 'page-login',
@@ -11,14 +12,14 @@ import {Sapiens} from '../../providers/sapiens';
 })
 export class LoginPage {
 
-  private login: {
-    user?: string,
-    pass?: string
-  } = {user: 'ER03621', pass: '0410'};
+  private login: any;
+  private configs: any;
 
   constructor(private navCtrl: NavController, private sapiens: Sapiens,
-              private loadingCtrl: LoadingController, private alertCtrl: AlertController,) {
+              private loadingCtrl: LoadingController, private alertCtrl: AlertController, private configsProvider: Configuracoes) {
 
+    this.configs = this.configsProvider.getConfigs();
+    this.login = this.configs.usuario;
   }
 
   logar() {
@@ -36,11 +37,21 @@ export class LoginPage {
 
     this.sapiens.login(this.login.user, this.login.pass).then(
       (sucess) => {
+
+        if(this.configs.usuario.save) {
+          this.configs.usuario = this.login;
+        } else {
+          this.configs.usuario = {user: '', pass: ''};
+        }
+        this.configsProvider.changed(this.configs);
+
         loading.dismiss();
         clearTimeout(timeout);
         this.navCtrl.setRoot(TabsPage);
       },
       err => {
+        loading.dismiss();
+        clearTimeout(timeout);
         this.alertCtrl.create({
           title: 'Falha no login',
           subTitle: err,

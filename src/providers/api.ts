@@ -47,4 +47,8 @@ export class API {
         );
     });
   }
+
+  public setBody(body) {
+    this.body = body;
+  }
 }

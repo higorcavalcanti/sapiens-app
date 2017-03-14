@@ -20,8 +20,8 @@ export class Database {
             resolve(data);
           },
           (err: any) => {
-            console.log('Database > set error', key, value, err);
-            //reject(err);
+            console.error('Database > set error', key, value, err);
+            reject(err);
           }
         );
       });
@@ -37,7 +37,7 @@ export class Database {
             resolve(data);
           },
           (err: any) => {
-            console.log('Database > get error', key, err);
+            console.error('Database > get error', key, err);
             reject(err);
           }
         );

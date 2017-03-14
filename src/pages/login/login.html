@@ -6,6 +6,10 @@
     <ion-item>
       <ion-input type="password" [(ngModel)]="login.pass" name="pass" placeholder="Digite sua senha" required></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label>Salvar login</ion-label>
+      <ion-checkbox [(ngModel)]="login.save" name="save"></ion-checkbox>
+    </ion-item>
     <button ion-button type="submit" (click)="logar()">Acessar</button>
   </form>
 </ion-content>

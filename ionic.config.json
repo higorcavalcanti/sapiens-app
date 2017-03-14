@@ -1,6 +1,6 @@
 {
-  "name": "appp",
-  "app_id": "",
+  "name": "Sapiens",
+  "app_id": "com.listaparanaiba.sapiens",
   "v2": true,
   "typescript": true
 }
