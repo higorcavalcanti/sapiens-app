@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {App,NavController} from 'ionic-angular';
 
 import {LoadingPage} from '../loading/loading';
 
@@ -14,7 +14,7 @@ export class ConfiguracoesPage {
 
   public config: any;
 
-  constructor(public navCtrl: NavController, private configProvider: Configuracoes, private sapiens: Sapiens) {
+  constructor(public navCtrl: NavController, private configProvider: Configuracoes, private sapiens: Sapiens,public app:App) {
     this.config = this.configProvider.getConfigs();
   }
 
@@ -24,7 +24,8 @@ export class ConfiguracoesPage {
 
   public logout() {
     this.sapiens.logout().then(() => {
-      this.navCtrl.setRoot(LoadingPage);
+   //this.navCtrl.setRoot(LoadingPage);
+      this.app.getRootNav().setRoot(LoadingPage);
     });
   }
 }
