@@ -20,11 +20,9 @@ export class HorariosPage {
   doRefresh(refresher) {
     this.horariosProvider.online().then(
       sucess => {
-        console.log('HorariosPage > refresh', sucess);
         refresher.complete();
       },
       err => {
-        console.log('HorariosPage > refresh > err', err);
         refresher.cancel();
         this.alertCtrl.create({
           title: 'Falha ao carregar',

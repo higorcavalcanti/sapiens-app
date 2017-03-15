@@ -14,7 +14,9 @@ export class Horarios {
 
   constructor(private api: API, private database: Database, private notificacoes: Notificacoes) {
     this.offline();
-    this.online();
+    this.online().catch(() => {
+      console.error("Falha ao carregar horarios online");
+    });
   }
 
   public getHorarios(): Observable<any[]> {
@@ -33,7 +35,7 @@ export class Horarios {
         this.disciplinas.next(parse.disciplinas);
       },
       (err: any) => {
-        console.log('Falha ao carregar horarios offline', err);
+        console.error('Falha ao carregar horarios offline', err);
       }
     );
   }
@@ -42,7 +44,7 @@ export class Horarios {
     return new Promise((resolve, reject) => {
       this.api.request('horarios').then(
         (data: any) => {
-          console.log('Horarios Provider > online', data);
+          console.info('Horarios Provider > online', data);
 
           if (data.hasOwnProperty('logado') && !data.logado) {
             if (data.hasOwnProperty('erro')) reject(data.erro);
@@ -58,7 +60,7 @@ export class Horarios {
           resolve(true);
         },
         (err: any) => {
-          console.log('Horarios Provider > online > err', err);
+          console.error('Horarios Provider > online > err', err);
           reject(err);
         }
       );

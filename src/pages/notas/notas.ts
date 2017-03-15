@@ -20,11 +20,9 @@ export class NotasPage {
   doRefresh(refresher) {
     this.notasProvider.online().then(
       sucess => {
-        console.log('NotasPage > refresh', sucess);
         refresher.complete();
       },
       err => {
-        console.log('NotasPage > refresh > err', err);
         refresher.cancel();
         this.alertCtrl.create({
           title: 'Falha ao carregar',

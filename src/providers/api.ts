@@ -32,17 +32,18 @@ export class API {
       body: JSON.stringify( this.body ),
     });
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       this.http.request(new Request(requestoptions))
-        .timeout(20000)
+        .timeout(2000)
         .map(res => res.json())
         .subscribe(
           data => {
-            console.log("HTTP Sucesso", url, data, body);
+            console.info("HTTP Sucesso", url, data, body);
             resolve(data);
           },
           err => {
-            console.log("HTTP Erro", url, err, body);
+            console.error("HTTP Erro", url, err, body);
+            reject(err);
           }
         );
     });

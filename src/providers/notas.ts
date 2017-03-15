@@ -12,7 +12,9 @@ export class Notas {
 
   constructor(private api: API, private database: Database) {
     this.offline();
-    this.online();
+    this.online().catch(() => {
+      console.error("Falha ao carregar notas online");
+    });
   }
 
   public getNotas(): Observable<any[]> {
@@ -25,7 +27,7 @@ export class Notas {
         this.notas.next( JSON.parse(data) );
       },
       (err: any) => {
-        console.log('Falha ao carregar notas offline', err);
+        console.error('Falha ao carregar notas offline', err);
       }
     );
   }
@@ -34,7 +36,7 @@ export class Notas {
     return new Promise((resolve, reject) => {
       this.api.request('notas').then(
         (data: any) => {
-          console.log('Notas Provider > online', data);
+          console.info('Notas Provider > online', data);
 
           if (data.hasOwnProperty('logado') && !data.logado) {
             if (data.hasOwnProperty('erro')) reject(data.erro);
@@ -46,7 +48,7 @@ export class Notas {
           resolve(true);
         },
         (err: any) => {
-          console.log('Notas Provider > online > err', err);
+          console.error('Notas Provider > online > err', err);
           reject(err);
         }
       );

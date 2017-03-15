@@ -12,7 +12,7 @@ export class NotasDetalhesPage {
   constructor(public navCtrl: NavController, private navParams: NavParams) {
     this.disciplina = navParams.get('disciplina');
 
-    console.log('NotasDetalhes', this.disciplina);
+    console.info('NotasDetalhes', this.disciplina);
   }
 
   porcentagem(nota, max = 100) {

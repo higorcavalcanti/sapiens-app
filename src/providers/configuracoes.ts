@@ -27,7 +27,7 @@ export class Configuracoes {
   };
 
   constructor(public database: Database) {
-    console.log('Config provider construtor');
+    console.info('Config provider construtor');
     this._configs.subscribe((config) => {
       this.prefs = config;
     })
