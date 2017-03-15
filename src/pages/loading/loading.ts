@@ -21,10 +21,12 @@ export class LoadingPage {
       let config = this.configs.getConfigs();
 
       if (config.usuario.save) {
+        console.log("Loading auto-login");
         this.api.setBody({user: config.usuario.user, pass: config.usuario.pass});
         this.navCtrl.setRoot(TabsPage);
       }
       else {
+        console.log("Loading indo pro login");
         this.navCtrl.setRoot(LoginPage);
       }
     });

@@ -1,7 +1,10 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
+import {LoadingPage} from '../loading/loading';
+
 import {Configuracoes} from '../../providers/configuracoes';
+import {Sapiens} from '../../providers/sapiens';
 
 @Component({
   selector: 'page-configuracoes',
@@ -9,18 +12,19 @@ import {Configuracoes} from '../../providers/configuracoes';
 })
 export class ConfiguracoesPage {
 
-  @ViewChild('myForm') form;
   public config: any;
 
-  constructor(public navCtrl: NavController, private configProvider: Configuracoes) {
+  constructor(public navCtrl: NavController, private configProvider: Configuracoes, private sapiens: Sapiens) {
     this.config = this.configProvider.getConfigs();
   }
 
-  private changed() {
+  changed() {
    this.configProvider.changed( this.config );
   }
 
   public logout() {
-
+    this.sapiens.logout().then(() => {
+      this.navCtrl.setRoot(LoadingPage);
+    });
   }
 }

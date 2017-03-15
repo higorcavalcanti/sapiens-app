@@ -28,6 +28,9 @@ export class Configuracoes {
 
   constructor(public database: Database) {
     console.log('Config provider construtor');
+    this._configs.subscribe((config) => {
+      this.prefs = config;
+    })
   }
 
   public initializePreferences() {
@@ -35,15 +38,16 @@ export class Configuracoes {
     return new Promise((resolve) => {
       this.database.get('configs').then(
         (result: any) => {
-          this._configs.next(JSON.parse(result));
-          console.log('preferences obtained from storage', JSON.parse(result));
-          resolve(1);
+          this.prefs = JSON.parse(result);
+          this._configs.next(this.prefs);
+          console.log('preferences obtained from storage', this.prefs);
+          resolve(this.prefs);
         },
         (err) => {
           this.padrao();
           this._configs.next(this.prefs);
           console.log('initializePreferences with default values', this.prefs);
-          resolve(2);
+          resolve(this.prefs);
         }
       );
     });
@@ -55,9 +59,6 @@ export class Configuracoes {
   }
 
   public getConfigs() {
-    if (this.prefs == null) {
-      this.padrao();
-    }
     console.log("ConfigsProvider > getConfigs", this.prefs);
     return this.prefs;
   }

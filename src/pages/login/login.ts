@@ -40,6 +40,7 @@ export class LoginPage {
 
         if(this.configs.usuario.save) {
           this.configs.usuario = this.login;
+          this.configs.usuario.save = true;
         } else {
           this.configs.usuario = {user: '', pass: ''};
         }

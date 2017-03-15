@@ -4,6 +4,7 @@ import {Observable} from "rxjs/Observable";
 
 import {API} from './api';
 import {Database} from './database';
+import {Notificacoes} from './notificacoes';
 
 @Injectable()
 export class Horarios {
@@ -11,7 +12,7 @@ export class Horarios {
   private horarios: BehaviorSubject<any[]> = new BehaviorSubject([]);
   private disciplinas: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
-  constructor(private api: API, private database: Database) {
+  constructor(private api: API, private database: Database, private notificacoes: Notificacoes) {
     this.offline();
     this.online();
   }
@@ -50,6 +51,8 @@ export class Horarios {
 
           this.horarios.next(data.horarios);
           this.disciplinas.next(data.disciplinas);
+
+          this.notificacoes.horarios( data.horarios );
 
           this.database.set('horarios', JSON.stringify(data));
           resolve(true);

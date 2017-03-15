@@ -44,4 +44,8 @@ export class Database {
       });
     });
   }
+
+  public clear() {
+    return NativeStorage.clear();
+  }
 }
