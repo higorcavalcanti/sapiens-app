@@ -1,15 +1,66 @@
 page-login {
+  
     .login{
-         background-color: #C2DBEF;
+      
+       @font-face {
+            font-family: "GOTHIC";
+            src: url("../assets/fonts/GOTHIC.ttf");
+            src: url("../assets/fonts/GOTHIC.eot");
+        }
 
-        .logo{
-            margin-top: 10px;
-            text-align: center;;
-        }
-        .conteudo{
-            margin: 5%  auto;
-            max-width: 400px;
-        }
+      background: #EAECED; /* For browsers that do not support gradients */
+      background: -webkit-radial-gradient(#FEFEFE, #EAECED); /* Safari 5.1 to 6.0 */
+      background: -o-radial-gradient(#FEFEFE, #EAECED); /* For Opera 11.6 to 12.0 */
+      background: -moz-radial-gradient(#FEFEFE, #EAECED); /* For Firefox 3.6 to 15 */
+      background: radial-gradient(#FEFEFE, #EAECED); /* Standard syntax */
+
+      .logo {
+        margin-top: 10px;
+        margin: auto;
+        text-align: center;
+      }
+      .conteudo {
+        margin: 0 auto;
+        max-width: 400px;
+      }
+
+      .formatacao {
+        //font-family: 'Century Gothic';
+        width: 90% !important;
+        font-size: 15px;
+        color: #333333;
+        background-color: white;
+        border: 1px solid #cccccc;
+        margin: 0 16px;
+        //padding: 0px 17px;
+        height: 20px !important;
+      }
+
+      .formatacao_check{
+          width: 90% !important;
+          color: #333333;
+          font-size: 12px;
+          background-color: transparent !important;
+          //font-family: 'Century Gothic';
+      }
+
+      .lembrar{
+        //margin: 0 -5px !important;
+      }
+      .espaco {
+        margin-top: 5px;
+      }
+
+      .espacoTopo{
+         margin-top: 35px;
+      }
+
+      .tamanho{
+        width: 90% !important;
+        margin: 0 16px;
+      }
+
+
 
     }
 
